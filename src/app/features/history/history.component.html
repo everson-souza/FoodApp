@@ -1,0 +1,36 @@
+
+<div class="toolbar">
+    <h1>LIKED FOOD</h1>
+    <button mat-icon-button aria-label="Clear liked food" (click)="onClearLikedFood()">
+        <mat-icon>clear_all</mat-icon>
+    </button>
+</div>
+<div *ngFor="let categoryName of getCategories()">
+    <h2>{{ categoryName }}</h2>
+
+    <div *ngIf="likedFoods$ | async as likedFoods; else noLikedFoods" class="food-card">
+        <div *ngFor="let food of foodsByCategory[categoryName]" class="liked-food-item">
+            
+            <mat-card class="example-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>{{food.name}}</mat-card-title>
+                    <mat-card-subtitle>{{food.shortDescription}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <img mat-card-image [src]="food.imageSet[0].url" alt="Photo of a Shiba Inu" class="food-hist-img">
+
+                <mat-card-content class="card-content">
+                    <p>{{food.description}}</p>
+                </mat-card-content>
+                <mat-card-actions align="end" (click)="openFoodDialog(food)">
+                    <button mat-button>Show description</button>            
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #noLikedFoods>
+    <p>No liked foods yet.</p>
+</ng-template>

@@ -1,0 +1,24 @@
+<div *ngIf="(foodQueue$ | async) as foodList">
+
+  <div *ngIf="foodList.length > 0; else noMoreItems" class="food-card" (swipeleft)="swipeLeft()" (swiperight)="swipeRight()">
+    <img [src]="foodList[0].imageSet[0].url" alt="Food Image" class="food-image">
+    <h3>{{ foodList[0].name }}</h3>
+    <p>{{ foodList[0].description }}</p>
+    <div class="swipe-buttons">
+      <button mat-fab class="example-icon" color="warn" (click)="swipeLeft()" aria-label="Example icon-button with share icon">
+        <mat-icon>thumb_down</mat-icon>
+      </button>
+      <button mat-fab class="example-icon" color="primary" (click)="swipeRight()" aria-label="Example icon-button with share icon">
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <ng-template #noMoreItems>
+    <p>No more items to show!</p>
+  </ng-template>
+
+</div>
+
+
+  
